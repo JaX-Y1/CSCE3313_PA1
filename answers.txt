@@ -1,0 +1,9 @@
+---100 MB FILE TRANSFER TIME---
+File transfer complete: received/test100.bin
+Time taken: 20.3281 seconds
+Client-side is done and exited
+Server terminated
+---EXPLAINATION: The limiting factor is the messages passing through the FIFO channel.
+The interprocess communication through the named pipes
+requires many thousands of small messages, 
+which adds significant overhead in system calls and context switching.
