@@ -7,6 +7,6 @@
 10 MB: 3.5892 seconds
 100 MB: 18.2190 seconds
 ---EXPLANATION: The limiting factor is the messages passing through the FIFO channel.
-Basically each time you want to send a chunk to write, you have to send a request through the FIFI channel,
+Basically each time you want to send a chunk to write, you have to send a request through the FIFO channel,
 wait for a response, and then write in to storage. This synchronous process
 results in a lot of overhead for larger file sizes, making it feel slow.
