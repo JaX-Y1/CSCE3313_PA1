@@ -1,9 +1,12 @@
----100 MB FILE TRANSFER TIME---
-File transfer complete: received/test100.bin
-Time taken: 20.3281 seconds
-Client-side is done and exited
-Server terminated
----EXPLAINATION: The limiting factor is the messages passing through the FIFO channel.
-The interprocess communication through the named pipes
-requires many thousands of small messages, 
-which adds significant overhead in system calls and context switching.
+---FILE TRANSFER TIME---
+256 bytes: 0.0004 seconds
+1 KB: 0.0006 seconds
+10 KB: 0.01299 seconds
+100 KB: 0.0562 seconds
+1 MB: 0.3406 seconds
+10 MB: 3.5892 seconds
+100 MB: 18.2190 seconds
+---EXPLANATION: The limiting factor is the messages passing through the FIFO channel.
+Basically each time you want to send a chunk to write, you have to send a request through the FIFI channel,
+wait for a response, and then write in to storage. This synchronous process
+results in a lot of overhead for larger file sizes, making it feel slow.
